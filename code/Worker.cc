@@ -121,6 +121,7 @@ void Worker::Map_functions(int task_chunkIdx) {
     std::vector<std::pair<int, std::string>> record = Input_split(task_chunkIdx) ;
     std::vector<std::pair<std::string, int>> out_record = Map(record) ;
     Partition(out_record) ;
+    // sleep(1) ;
     // done
     MPI_Send(&task_chunkIdx, 1, MPI_INT, 0, 1, MPI_COMM_WORLD) ;
 }
@@ -213,6 +214,7 @@ void Worker::Reduce_functions(int reducer_task) {
     std::map<std::string, std::vector<int>> group_records = Group(records) ;
     std::vector<std::pair<std::string, int>> results = Reduce(group_records) ;
     Output(results, reducer_task) ;
+    // sleep(1) ;
 }
 
 bool compare_func(std::pair<std::string, int> a, std::pair<std::string, int> b) {
